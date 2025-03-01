@@ -1,0 +1,13 @@
+
+lib/*
+obj/*
+
+*.exe
+*.dll
+*.so
+*.lib
+*.a
+*.o
+*.obj
+*.log
+*.idb

@@ -1,0 +1,24 @@
+# Project file to build modbus utility with HwBuilder
+
+makemode=on
+objpath=obj
+
+{win}c_compiler=mingw
+guilib=
+cflags=-Iinclude
+libs=stdc++
+
+outpath=bin
+outname=modbus
+
+srcpath=source/util
+
+modbus.cpp
+{win}w32comm.cpp
+{unix}unixcomm.cpp
+crc.cpp
+
+srcpath=source/common
+
+funcs.cpp
+ini.cpp

@@ -19,7 +19,7 @@ public:
    int hasItem( std::string sSection, std::string sItemKey );
    std::string getValue( std::string sSection, std::string sItemKey );
    void setValue( std::string sSection, std::string sItemKey, std::string sValue );
-   std::shared_ptr<std::vector<std::string>> getList( void );
-   std::shared_ptr<std::vector<std::string>> getList( std::string sSection );
+   std::unique_ptr<std::vector<std::string>> getList( void );
+   std::unique_ptr<std::vector<std::string>> getList( std::string sSection );
    void save( char * szName = NULL );
 };

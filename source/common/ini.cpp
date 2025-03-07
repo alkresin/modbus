@@ -97,10 +97,10 @@ void ini::save( char * szName ) {
       cpp_WriteFile( szFileName.c_str(), s.c_str(), 0 );
 }
 
-std::shared_ptr<std::vector<std::string>> ini::getList( void ) {
+std::unique_ptr<std::vector<std::string>> ini::getList( void ) {
 
    int iCount = pIni.size(), i = 0;
-   auto v = std::make_shared<std::vector<std::string>>( iCount );
+   auto v = std::make_unique<std::vector<std::string>>( iCount );
 
    if( iCount > 0 ) {
       for (const auto& p : pIni ) {
@@ -111,12 +111,12 @@ std::shared_ptr<std::vector<std::string>> ini::getList( void ) {
    return v;
 }
 
-std::shared_ptr<std::vector<std::string>> ini::getList( std::string sSection ) {
+std::unique_ptr<std::vector<std::string>> ini::getList( std::string sSection ) {
 
    if( pIni.count( sSection ) > 0 ) {
       auto pSection = pIni[sSection];
       int iCount = pSection.size(), i = 0;
-      auto v = std::make_shared<std::vector<std::string>>( iCount );
+      auto v = std::make_unique<std::vector<std::string>>( iCount );
 
       if( iCount > 0 ) {
          for (const auto& p : pSection ) {
@@ -126,5 +126,5 @@ std::shared_ptr<std::vector<std::string>> ini::getList( std::string sSection ) {
       }
       return v;
    } else
-      return std::make_shared<std::vector<std::string>>();
+      return std::make_unique<std::vector<std::string>>();
 }

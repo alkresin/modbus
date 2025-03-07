@@ -2,6 +2,7 @@
  */
 
 #include "ini.h"
+#include "funcs.h"
 #include <iostream>
 #include <algorithm>
 #include <chrono>
@@ -211,12 +212,29 @@ int reopen( void ) {
 
 int main( int argc, char ** argv ) {
 
-   std::string szScr, sInput;
+   std::string sInput;
    int iChoic;
 
    readini( (char*)"modbus.ini" );
    if (argc >= 2) {
-      szScr = argv[1];
+      long ulLen;
+      char * pBuffer = cpp_ReadFile( argv[1], &ulLen ), *ptr, *ptr2;
+      if( pBuffer ) {
+         std::string s;
+         ptr2 = pBuffer;
+         do {
+            ptr = ptr2;
+            while( *ptr && *ptr <= ' ' ) ptr ++;
+            if( *ptr == '#' )
+               continue;
+            ptr2 = strpbrk( ptr, "=\r\n\0" );
+            if( *ptr2 == '=' ) {
+            } else {
+               wrcmd( s.assign( ptr, ptr2-ptr) );
+            }
+         } while( ptr2 && *ptr2 );
+         delete pBuffer;
+      }
    }
 
    if( reopen() )
